@@ -6,7 +6,7 @@ const Swatch = React.createClass({
       backgroundColor: this.props.color
     };
 
-    return <input className="swatch" type="radio" name="swatch" style={style} value={this.props.color} onClick={this.props.handleChange} checked={this.props.checked} />
+    return <input className="swatch" type="radio" name="swatch" style={style} value={this.props.color} onChange={this.props.handleChange} defaultChecked={this.props.checked} />
   }
 });
 

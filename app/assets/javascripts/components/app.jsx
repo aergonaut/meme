@@ -9,7 +9,8 @@ const App = React.createClass({
       "overlayColor": "#000000",
       "overlayAlpha": "0.5",
       "headline": "Write your own headline",
-      "textAlign": "left"
+      "textAlign": "left",
+      "backgroundImageFile": false
     }
   },
 
@@ -23,6 +24,26 @@ const App = React.createClass({
   
   handleOverlayChange: function(event) {
     this.setState({ "overlayColor": event.target.value });
+  },
+
+  handleDrop: function(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    let dt = event.dataTransfer,
+        files = dt.files,
+        file = files[0];
+    
+    let img = new Image();
+    let reader = new FileReader();
+    var self = this;
+    reader.onload = (function(aImg) {
+      return function(e) {
+        aImg.src = e.target.result;
+        self.setState({ "backgroundImageFile": img });
+      };
+    })(img);
+    reader.readAsDataURL(file);
   },
 
   render: function() {
@@ -42,7 +63,8 @@ const App = React.createClass({
               {...this.state}
               headlineChange={this.headlineChange}
               textAlignChange={this.handleTextAlignChange}
-              overlayChange={this.handleOverlayChange} />
+              overlayChange={this.handleOverlayChange}
+              handleDrop={this.handleDrop} />
           </div>
         </div>
       </div>

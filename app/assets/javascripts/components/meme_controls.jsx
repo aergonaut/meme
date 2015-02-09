@@ -3,6 +3,7 @@ import FormInput from './form_input.jsx';
 import FormTextarea from './form_textarea.jsx';
 import FormSelect from './form_select.jsx';
 import Swatches from './swatches.jsx';
+import Dropzone from './dropzone.jsx';
 
 const MemeControls = React.createClass({
   render: function() {
@@ -38,6 +39,7 @@ const MemeControls = React.createClass({
           options={overlayOptions}
           labelText="Overlay"
           handleChange={this.props.overlayChange} />
+        <Dropzone handleDrop={this.props.handleDrop} />
       </div>
     );
   }

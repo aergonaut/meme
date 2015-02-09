@@ -2,8 +2,8 @@ import React from 'react';
 
 const MemeCanvas = React.createClass({
   componentDidMount: function() {
-    let canvas = this.refs.canvas.getDOMNode();
-    this.ctx = canvas.getContext('2d');
+    this.canvas = this.refs.canvas.getDOMNode();
+    this.ctx = this.canvas.getContext('2d');
     this.renderCanvas();
   },
 
@@ -13,8 +13,31 @@ const MemeCanvas = React.createClass({
   },
 
   renderCanvas: function() {
+    this.renderBackgroundImage();
     this.renderOverlay();
     this.renderText();
+    let download = this.refs.download.getDOMNode();
+    console.log(this.canvas);
+    download.setAttribute('href', this.canvas.toDataURL());
+  },
+  
+  renderBackgroundImage: function() {
+    if (this.props.backgroundImageFile) {
+      this.ctx.save();
+      let frame = { width: 755, height: 358 };
+
+      let dx = 0, dy = 0;
+
+      let dWidth = this.props.backgroundImageFile.width, dHeight = this.props.backgroundImageFile.height;
+
+      let sx = Math.floor((this.props.backgroundImageFile.width - frame.width) / 2),
+          sy = Math.floor((this.props.backgroundImageFile.height - frame.height) / 2),
+          sWidth = frame.width,
+          sHeight = frame.height;
+
+      this.ctx.drawImage(this.props.backgroundImageFile, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      this.ctx.restore();
+    }
   },
 
   renderOverlay: function() {
@@ -36,13 +59,30 @@ const MemeCanvas = React.createClass({
     this.ctx.font = "italic 300 32px Lato";
     this.ctx.textAlign = this.props.textAlign;
     this.ctx.fillStyle = "#fff";
-    this.ctx.fillText(this.props.headline, 50, 75);
+    let xOffset = 50;
+    if (this.props.textAlign == "center") {
+      xOffset = 377;
+    } else if (this.props.textAlign == "right") {
+      xOffset = 755 - 50;
+    }
+    this.ctx.fillText(this.props.headline, xOffset, 75);
     this.ctx.restore();
   },
 
   render: function() {
     return (
-      <canvas ref="canvas" id="meme-canvas" width="755" height="378"></canvas>
+      <div>
+        <div className="row">
+          <div className="col-sm-12">
+            <canvas ref="canvas" id="meme-canvas" width="755" height="378"></canvas>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <a ref="download" download="your_image.png" id="download" className="btn btn-default btn-lg btn-block">Download Image</a>
+          </div>
+        </div>
+      </div>
     )
   }
 });

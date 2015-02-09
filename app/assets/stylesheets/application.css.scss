@@ -50,3 +50,23 @@ $headings-font-family: "Crete Round", serif;
     color: #fff;
   }
 }
+
+.dropzone {
+  border: 5px dashed #aaa;
+  color: #aaa;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  padding: 50px;
+  font-size: 20px;
+  border-radius: 10px;
+  
+  &.accept-drop {
+    color: #91C000;
+    border-color: #91C000;
+  }
+}
+
+#download {
+  margin: 1em 0;
+}

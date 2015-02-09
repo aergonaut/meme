@@ -9,7 +9,7 @@ const Swatches = React.createClass({
         <div>
           {this.props.options.map((opt) => {
             let isChecked = opt.color == this.props.selected;
-            return <Swatch {...opt} handleChange={this.props.handleChange} checked={isChecked} />;
+            return <Swatch key={opt.color} {...opt} handleChange={this.props.handleChange} checked={isChecked} />;
           })}
         </div>
       </div>
