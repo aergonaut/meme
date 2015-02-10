@@ -19,7 +19,7 @@ const MemeCanvas = React.createClass({
     let download = this.refs.download.getDOMNode();
     download.setAttribute('href', this.canvas.toDataURL());
   },
-  
+
   renderBackgroundImage: function() {
     if (this.props.backgroundImageFile) {
       this.ctx.save();
@@ -47,12 +47,12 @@ const MemeCanvas = React.createClass({
     this.ctx.globaAlpha = 1;
     this.ctx.restore();
   },
-  
+
   renderText: function() {
     this.renderHeadline();
     // this.renderSourceLine();
   },
-  
+
   renderHeadline: function() {
     this.ctx.save();
     this.ctx.font = "italic 300 32px Lato";
