@@ -21,7 +21,7 @@ const App = React.createClass({
   handleTextAlignChange: function(event) {
     this.setState({ "textAlign": event.target.value });
   },
-  
+
   handleOverlayChange: function(event) {
     this.setState({ "overlayColor": event.target.value });
   },
