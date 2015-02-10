@@ -29,20 +29,18 @@ const App = React.createClass({
   handleDrop: function(event) {
     event.stopPropagation();
     event.preventDefault();
-    
+
     let dt = event.dataTransfer,
         files = dt.files,
         file = files[0];
-    
-    let img = new Image();
-    let reader = new FileReader();
-    var self = this;
-    reader.onload = (function(aImg) {
-      return function(e) {
-        aImg.src = e.target.result;
-        self.setState({ "backgroundImageFile": img });
-      };
-    })(img);
+
+    let img = new Image(),
+        reader = new FileReader();
+
+    reader.onload = (e) => {
+      img.src = e.target.result;
+      this.setState({ "backgroundImageFile": img });
+    }
     reader.readAsDataURL(file);
   },
 
