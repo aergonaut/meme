@@ -8,7 +8,7 @@ const MemeCanvas = React.createClass({
   },
 
   componentDidUpdate: function() {
-    this.ctx.clearRect(0, 0, 755, 378);
+    this.ctx.clearRect(0, 0, this.props.width, this.props.height);
     this.renderCanvas();
   },
 
@@ -17,14 +17,13 @@ const MemeCanvas = React.createClass({
     this.renderOverlay();
     this.renderText();
     let download = this.refs.download.getDOMNode();
-    console.log(this.canvas);
     download.setAttribute('href', this.canvas.toDataURL());
   },
   
   renderBackgroundImage: function() {
     if (this.props.backgroundImageFile) {
       this.ctx.save();
-      let frame = { width: 755, height: 358 };
+      let frame = { width: this.props.width, height: 358 };
 
       let dx = 0, dy = 0;
 
@@ -44,7 +43,7 @@ const MemeCanvas = React.createClass({
     this.ctx.save();
     this.ctx.globalAlpha = this.props.overlayAlpha;
     this.ctx.fillStyle = this.props.overlayColor;
-    this.ctx.fillRect(0, 0, 755, 378);
+    this.ctx.fillRect(0, 0, this.props.width, this.props.height);
     this.ctx.globaAlpha = 1;
     this.ctx.restore();
   },
@@ -63,7 +62,7 @@ const MemeCanvas = React.createClass({
     if (this.props.textAlign == "center") {
       xOffset = 377;
     } else if (this.props.textAlign == "right") {
-      xOffset = 755 - 50;
+      xOffset = this.props.width - 50;
     }
     this.ctx.fillText(this.props.headline, xOffset, 75);
     this.ctx.restore();
@@ -74,7 +73,7 @@ const MemeCanvas = React.createClass({
       <div>
         <div className="row">
           <div className="col-sm-12">
-            <canvas ref="canvas" id="meme-canvas" width="755" height="378"></canvas>
+            <canvas ref="canvas" id="meme-canvas" width={this.props.width} height={this.props.height}></canvas>
           </div>
         </div>
         <div className="row">

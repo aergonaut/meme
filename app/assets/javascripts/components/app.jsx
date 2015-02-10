@@ -56,7 +56,7 @@ const App = React.createClass({
         </div>
         <div className="row">
           <div className="col-lg-8">
-            <MemeCanvas {...this.state} />
+            <MemeCanvas {...this.state} width={755} height={378} />
           </div>
           <div className="col-lg-4">
             <MemeControls
