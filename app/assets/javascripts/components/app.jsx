@@ -10,7 +10,7 @@ const App = React.createClass({
     return Map({
       "overlay": true,
       "overlayColor": "#000000",
-      "overlayAlpha": "0.5",
+      "overlayAlpha": 0.3,
       "headline": "Write your own headline",
       "textAlign": "left",
       "backgroundImageFile": false
@@ -27,6 +27,10 @@ const App = React.createClass({
 
   handleOverlayChange: function(event) {
     this.replaceState(this.state.set("overlayColor", event.target.value));
+  },
+
+  handleOpacityChange: function(event) {
+    this.replaceState(this.state.set("overlayAlpha", event.target.value / 100));
   },
 
   handleDrop: function(event) {
@@ -65,6 +69,7 @@ const App = React.createClass({
               headlineChange={this.headlineChange}
               textAlignChange={this.handleTextAlignChange}
               overlayChange={this.handleOverlayChange}
+              opacityChange={this.handleOpacityChange}
               handleDrop={this.handleDrop} />
           </div>
         </div>

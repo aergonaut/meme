@@ -31,8 +31,8 @@ const MemeCanvas = React.createClass({
       let dWidth = this.props.backgroundImageFile.width,
           dHeight = this.props.backgroundImageFile.height;
 
-      let sx = Math.floor((this.props.backgroundImageFile.width - this.props.width) / 2),
-          sy = Math.floor((this.props.backgroundImageFile.height - this.props.height) / 2),
+      let sx = Math.max(Math.floor((this.props.backgroundImageFile.width - this.props.width) / 2), 0),
+          sy = Math.max(Math.floor((this.props.backgroundImageFile.height - this.props.height) / 2), 0),
           sWidth = this.props.width,
           sHeight = this.props.height;
 
