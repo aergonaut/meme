@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react/addons';
 import Swatch from './swatch.jsx';
 
 const Swatches = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   render: function() {
     return (
       <div className="form-group">

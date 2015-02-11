@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 const MemeCanvas = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   componentDidMount: function() {
     this.canvas = this.refs.canvas.getDOMNode();
     this.ctx = this.canvas.getContext('2d');

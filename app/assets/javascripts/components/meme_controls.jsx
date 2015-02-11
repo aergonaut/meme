@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react/addons';
 import FormInput from './form_input.jsx';
 import FormTextarea from './form_textarea.jsx';
 import FormSelect from './form_select.jsx';
@@ -6,6 +6,8 @@ import Swatches from './swatches.jsx';
 import Dropzone from './dropzone.jsx';
 
 const MemeControls = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   render: function() {
     let textAlignOptions = [
       { value: "left", label: "Left" },

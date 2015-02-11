@@ -1,29 +1,32 @@
-import React from 'react';
+import React from 'react/addons';
 import MemeCanvas from './meme_canvas.jsx';
 import MemeControls from './meme_controls.jsx';
+import {Map} from 'immutable';
 
 const App = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   getInitialState: function() {
-    return {
+    return Map({
       "overlay": true,
       "overlayColor": "#000000",
       "overlayAlpha": "0.5",
       "headline": "Write your own headline",
       "textAlign": "left",
       "backgroundImageFile": false
-    }
+    });
   },
 
   headlineChange: function(event) {
-    this.setState({ "headline": event.target.value });
+    this.replaceState(this.state.set("headline", event.target.value));
   },
 
   handleTextAlignChange: function(event) {
-    this.setState({ "textAlign": event.target.value });
+    this.replaceState(this.state.set("textAlign", event.target.value));
   },
 
   handleOverlayChange: function(event) {
-    this.setState({ "overlayColor": event.target.value });
+    this.replaceState(this.state.set("overlayColor", event.target.value));
   },
 
   handleDrop: function(event) {
@@ -39,7 +42,7 @@ const App = React.createClass({
 
     reader.onload = (e) => {
       img.src = e.target.result;
-      this.setState({ "backgroundImageFile": img });
+      this.replaceState(this.state.set("backgroundImageFile", img));
     }
     reader.readAsDataURL(file);
   },
@@ -54,11 +57,11 @@ const App = React.createClass({
         </div>
         <div className="row">
           <div className="col-lg-8">
-            <MemeCanvas {...this.state} width={755} height={378} />
+            <MemeCanvas {...this.state.toObject()} width={755} height={378} />
           </div>
           <div className="col-lg-4">
             <MemeControls
-              {...this.state}
+              {...this.state.toObject()}
               headlineChange={this.headlineChange}
               textAlignChange={this.handleTextAlignChange}
               overlayChange={this.handleOverlayChange}

@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 const Swatch = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   render: function() {
     let style = {
       backgroundColor: this.props.color

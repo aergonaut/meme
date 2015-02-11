@@ -1,6 +1,8 @@
-import React from 'react';
+import React from 'react/addons';
 
 const FormTextarea = React.createClass({
+  mixins: [React.addons.PureRenderMixin],
+
   render: function() {
     return (
       <div className="form-group">
