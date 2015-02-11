@@ -25,16 +25,16 @@ const MemeCanvas = React.createClass({
   renderBackgroundImage: function() {
     if (this.props.backgroundImageFile) {
       this.ctx.save();
-      let frame = { width: this.props.width, height: 358 };
 
       let dx = 0, dy = 0;
 
-      let dWidth = this.props.backgroundImageFile.width, dHeight = this.props.backgroundImageFile.height;
+      let dWidth = this.props.backgroundImageFile.width,
+          dHeight = this.props.backgroundImageFile.height;
 
-      let sx = Math.floor((this.props.backgroundImageFile.width - frame.width) / 2),
-          sy = Math.floor((this.props.backgroundImageFile.height - frame.height) / 2),
-          sWidth = frame.width,
-          sHeight = frame.height;
+      let sx = Math.floor((this.props.backgroundImageFile.width - this.props.width) / 2),
+          sy = Math.floor((this.props.backgroundImageFile.height - this.props.height) / 2),
+          sWidth = this.props.width,
+          sHeight = this.props.height;
 
       this.ctx.drawImage(this.props.backgroundImageFile, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       this.ctx.restore();
